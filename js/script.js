@@ -29,30 +29,41 @@ activeImgEl.src = arrImg[index];
 
 const thumbnailsContainerEl = document.querySelector('.thumbnails-container');
 
+
+let thumbDiv;
+let thumbImg;
+let thumbImgArr;
 // ora 'appendo' al thumnail-container tanti div quante immagini ho nel mio array di immagini
 for (let i = 0; i < maxArrImg; i++){
   // creo un elemento div che conterrà una thumbnail
   // e assegno una nuova classe agli elementi
 
-  const thumbDiv = document.createElement('div');
-  thumbDiv.className = "thumbnail-div"
+  thumbDiv = document.createElement('div');
+  thumbDiv.className = "thumbnail-div "
   thumbnailsContainerEl.append(thumbDiv)
   thumbDiv.style.height = `calc(100% / ${maxArrImg})`;
   thumbDiv.style.border = '2px solid black';
 
-  const thumbImg = document.createElement('img');
-  thumbImg.className = 'thumbnail-image';
+  thumbImg = document.createElement('img');
+  thumbImg.className = 'thumbnail-image opaco ';
   thumbDiv.append(thumbImg);
-  thumbImg.src = arrImg[i]
+  thumbImg.src = arrImg[i];
+  
   
   
 }
 
+thumbImgArr = document.querySelectorAll('.thumbnail-image');
+  console.log(thumbImgArr);
 
+  let thumbImgActive = thumbImgArr[index];
+  thumbImgActive.classList.add('active');
 
-topArrowEl.addEventListener('click', function(){
+bottomArrowEl.addEventListener('click', function(){
   console.log('clicktop'); 
   
+  thumbImgActive.classList.remove('active');
+
   if (index === maxArrImg - 1) {
     index = 0;
   } else {
@@ -62,13 +73,20 @@ topArrowEl.addEventListener('click', function(){
   }
   // aggiungi la classe active al cerchio relativo alla posizione dell'indice
   activeImgEl.src = arrImg[index];
-  // console.log(index);
+
+  // aggiungi lo stato active allimmagine thumb corrispondente
+  thumbImgActive = thumbImgArr[index];
   
+  thumbImgActive.classList.add('active');
+  
+  
+    
 
 })
 
-bottomArrowEl.addEventListener('click', function(){
+topArrowEl.addEventListener('click', function(){
   console.log('clickbottom');
+  thumbImgActive.classList.remove('active');
   if (index === 0) {
     index = maxArrImg - 1;
   } else {
@@ -79,6 +97,11 @@ bottomArrowEl.addEventListener('click', function(){
   // aggiungi la classe active al cerchio relativo alla posizione dell'indice
   activeImgEl.src = arrImg[index];
   // console.log(index);
+
+  // aggiungi lo stato active allimmagine thumb corrispondente
+  thumbImgActive = thumbImgArr[index];
+  
+  thumbImgActive.classList.add('active');
 });
 
 
